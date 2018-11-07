@@ -1,20 +1,17 @@
 import React, { Component } from "react";
-import fetch from 'node-fetch'
 
 class App extends Component {
   state = {
     newTodo: "",
-    todos: []
+    todos: [
+      "Buy tea",
+      "Buy boba",
+      "Boil water",
+      "Add boba",
+      "Drain water",
+      "Add tea"
+    ]
   };
-
-  async componentDidMount() {
-    const response = await fetch(`http://localhost:8000/all`);
-    const json = await response.json();
-    console.log(json)
-    const items = json.map(item => item.name);
-    console.log(items)
-    this.setState({ todos: items });
-  }
 
   handleDelete = event => {
     var newTodoList = [...this.state.todos]; 
@@ -28,8 +25,11 @@ class App extends Component {
   };
 
   handleSubmit = event => {
-    fetch('http://localhost:8000/add/' + this.state.newTodo);
-    this.setState({ newTodo: "" });
+    event.preventDefault();
+    this.setState({
+      todos: [...this.state.todos, this.state.newTodo],
+      newTodo: ""
+    });
   };
 
   render() {
