@@ -19,7 +19,11 @@ app.get("/add/:name", function(req, res) {
   console.log("Added Item " + req.params.name);
   res.send("Added Item " + req.params.name);
 });
-
+app.get("/remove/:name", function(req, res) {
+  item.remove();
+  console.log("Removed Item " + req.params.name);
+  res.send("Removed Item " + req.params.name);
+});
 app.get("/all", async function(req, res) {
   const items = await Item.find();
   console.log("All Items In The Database");
